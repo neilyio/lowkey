@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { render } from "react-dom";
-import iconBoldDiscovery from "./icons/bold/Discovery.svg";
-import iconBoldEditSquare from "./icons/bold/Edit Square.svg";
-import iconBoldVideo from "./icons/bold/Video.svg";
-import iconOutlineDiscovery from "./icons/outline/Discovery.svg";
-import iconOutlineEditSquare from "./icons/outline/Edit Square.svg";
-import iconOutlineVideo from "./icons/outline/Video.svg";
-import "./global.css";
+import iconBoldDiscovery from "../icons/bold/Discovery.svg";
+import iconBoldEditSquare from "../icons/bold/Edit Square.svg";
+import iconBoldVideo from "../icons/bold/Video.svg";
+import iconOutlineDiscovery from "../icons/outline/Discovery.svg";
+import iconOutlineEditSquare from "../icons/outline/Edit Square.svg";
+import iconOutlineVideo from "../icons/outline/Video.svg";
+import "../css/global.css";
 import { LayerStack, FadeBetween } from "./utilities";
 import { CanvasContainer, CanvasLabel } from "./canvas";
 import {
