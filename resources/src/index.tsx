@@ -1,30 +1,24 @@
-import React, { useState } from "react";
+// @ts-nocheck
+
+// At runtime, the imports below will be strings of the file paths,
+// But TypeScript, by default, doesn't recognize the esbuild "loader" imports
+// for things like fonts, icons, and css.
+// To keep our configuraton simple for this demo, I've consolidated all the
+// problematic imports into this @ts-nocheck file, so they can be passed as
+// arguments to properly type-safe components.
+import React from "react";
 import { render } from "react-dom";
-import iconBoldDiscovery from "../icons/bold/Discovery.svg";
-import iconBoldEditSquare from "../icons/bold/Edit Square.svg";
-import iconBoldVideo from "../icons/bold/Video.svg";
-import iconOutlineDiscovery from "../icons/outline/Discovery.svg";
-import iconOutlineEditSquare from "../icons/outline/Edit Square.svg";
-import iconOutlineVideo from "../icons/outline/Video.svg";
-import "../css/global.css";
-import { LayerStack, FadeBetween } from "./utilities";
-import { CanvasContainer, CanvasLabel } from "./canvas";
-import {
-  SidebarCursor,
-  SidebarContainer,
-  SidebarFill,
-  SidebarIcon,
-  SidebarLabel,
-  SidebarTarget,
-  SidebarChildContainer,
-} from "./sidebar";
+import "../dist/css/global.css";
+import iconBoldDiscovery from "../dist/icons/bold/Discovery.svg";
+import iconBoldEditSquare from "../dist/icons/bold/Edit Square.svg";
+import iconBoldVideo from "../dist/icons/bold/Video.svg";
+import iconOutlineDiscovery from "../dist/icons/outline/Discovery.svg";
+import iconOutlineEditSquare from "../dist/icons/outline/Edit Square.svg";
+import iconOutlineVideo from "../dist/icons/outline/Video.svg";
+import { App } from "./app"
 
-const AppContainer = ({ children }) => (
-  <div className="w-full h-full bg-black flex">{children}</div>
-);
 
-const App = () => {
-  const data = [
+render(<App sidebar={[
     { label: "Browse", bold: iconBoldDiscovery, outline: iconOutlineDiscovery },
     { label: "Recordings", bold: iconBoldVideo, outline: iconOutlineVideo },
     {
@@ -32,57 +26,4 @@ const App = () => {
       bold: iconBoldEditSquare,
       outline: iconOutlineEditSquare,
     },
-  ];
-  const height = 56;
-  const [selected, setSelected] = useState(0);
-  const [hovered, setHovered] = useState<number | null>(null);
-
-  return (
-    <AppContainer>
-      <SidebarContainer>
-        <LayerStack>
-          {data.map(({ label }, index) => (
-            <SidebarFill
-              key={label}
-              height={height}
-              selected={hovered === index}
-            />
-          ))}
-          {data.map(({ label, outline }) => (
-            <SidebarChildContainer key={label} height={height} >
-              <SidebarIcon src={outline} />
-              <SidebarLabel>{label}</SidebarLabel>
-            </SidebarChildContainer>
-          ))}
-          <SidebarCursor height={height} index={selected}>
-            {data.map(({ label, bold }) => (
-              <SidebarChildContainer key={label} height={height}>
-                <SidebarIcon src={bold} />
-                <SidebarLabel>{label}</SidebarLabel>
-              </SidebarChildContainer>
-            ))}
-          </SidebarCursor>
-          {data.map(({ label }, index) => (
-            <SidebarTarget
-              key={label}
-              height={height}
-              onClick={() => setSelected(index)}
-              onMouseEnter={() => setHovered(index)}
-              onMouseLeave={() => setHovered(null)}
-            >
-            </SidebarTarget>
-          ))}
-        </LayerStack>
-      </SidebarContainer>
-      <CanvasContainer>
-        <FadeBetween selected={selected} config={{ duration: 300 }}>
-          {data.map(({ label }) => (
-            <CanvasLabel>{label}</CanvasLabel>
-          ))}
-        </FadeBetween>
-      </CanvasContainer>
-    </AppContainer>
-  );
-};
-
-render(<App />, document.getElementsByTagName("body")[0]);
+  ]}/>, document.getElementById("app"));

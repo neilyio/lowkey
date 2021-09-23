@@ -7,7 +7,7 @@ import {
   Child,
   OnMouseEnter,
   OnMouseLeave,
-  Selected,
+  IsSelected,
   ChildArray,
 } from "./types";
 
@@ -57,17 +57,17 @@ export const SidebarTarget = ({
 
 export const SidebarIcon = ({ src }) => <img className="h-8" src={src}></img>;
 
-export const SidebarFill = ({ height, selected }: Height & Selected) => (
+export const SidebarFill = ({ height, isSelected }: Height & IsSelected) => (
   <div
     className={
       "w-full rounded-md transition-colors duration-100" +
-      (selected ? " bg-gray-900" : "")
+      (isSelected ? " bg-gray-900" : "")
     }
-    style={{ height, backgroundColor: selected && "rgba(228, 228, 228, 0.1)" }}
+    style={{ height, backgroundColor: isSelected && "rgba(228, 228, 228, 0.1)" }}
   />
 );
 
-export const SidebarContainer = ({ children }: ChildArray) => (
+export const SidebarContainer = ({ children }: ChildArray | Child) => (
   <div
     className="w-[350px] h-full p-[20px] box-border flex justify-center"
     style={{ boxShadow: "inset -1px 0px 0px rgba(228, 228, 228, 0.2)" }}
@@ -76,7 +76,7 @@ export const SidebarContainer = ({ children }: ChildArray) => (
   </div>
 );
 
-export const SidebarLabel = ({ children }: ChildArray) => (
+export const SidebarLabel = ({ children }: Child) => (
   <p
     className="text-white whitespace-nowrap"
     style={{ fontStyle: "normal", fontWeight: 600, fontSize: 16 }}
