@@ -1,25 +1,37 @@
-/* import { hydrate, prerender as ssr } from "preact-iso"; */
-/* import { ComponentChildren } from "preact" */
-
 import React, { useState } from "react";
 import { render } from "react-dom";
 import iconBoldDiscovery from "./icons/bold/Discovery.svg";
 import iconBoldEditSquare from "./icons/bold/Edit Square.svg";
 import iconBoldVideo from "./icons/bold/Video.svg";
+import iconOutlineDiscovery from "./icons/outline/Discovery.svg";
+import iconOutlineEditSquare from "./icons/outline/Edit Square.svg";
+import iconOutlineVideo from "./icons/outline/Video.svg";
 import "./global.css";
-import { LayerStack, FadeBetween } from "./utilities"
-import { CanvasContainer, CanvasLabel } from "./canvas"
-import { SidebarCursor, SidebarContainer, SidebarFill, SidebarIcon, SidebarLabel, SidebarTarget  } from "./sidebar"
+import { LayerStack, FadeBetween } from "./utilities";
+import { CanvasContainer, CanvasLabel } from "./canvas";
+import {
+  SidebarCursor,
+  SidebarContainer,
+  SidebarFill,
+  SidebarIcon,
+  SidebarLabel,
+  SidebarTarget,
+  SidebarChildContainer,
+} from "./sidebar";
 
-const AppContainer = ({ children }: any) => (
+const AppContainer = ({ children }) => (
   <div className="w-full h-full bg-black flex">{children}</div>
 );
 
 const App = () => {
   const data = [
-    { label: "Browse", icon: iconBoldDiscovery },
-    { label: "Recordings", icon: iconBoldVideo },
-    { label: "New Message", icon: iconBoldEditSquare },
+    { label: "Browse", bold: iconBoldDiscovery, outline: iconOutlineDiscovery },
+    { label: "Recordings", bold: iconBoldVideo, outline: iconOutlineVideo },
+    {
+      label: "New Message",
+      bold: iconBoldEditSquare,
+      outline: iconOutlineEditSquare,
+    },
   ];
   const height = 56;
   const [selected, setSelected] = useState(0);
@@ -36,8 +48,21 @@ const App = () => {
               selected={hovered === index}
             />
           ))}
-          <SidebarCursor height={height} index={selected} />
-          {data.map(({ label, icon }, index) => (
+          {data.map(({ label, outline }) => (
+            <SidebarChildContainer key={label} height={height} >
+              <SidebarIcon src={outline} />
+              <SidebarLabel>{label}</SidebarLabel>
+            </SidebarChildContainer>
+          ))}
+          <SidebarCursor height={height} index={selected}>
+            {data.map(({ label, bold }) => (
+              <SidebarChildContainer key={label} height={height}>
+                <SidebarIcon src={bold} />
+                <SidebarLabel>{label}</SidebarLabel>
+              </SidebarChildContainer>
+            ))}
+          </SidebarCursor>
+          {data.map(({ label }, index) => (
             <SidebarTarget
               key={label}
               height={height}
@@ -45,8 +70,6 @@ const App = () => {
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
             >
-              <SidebarIcon src={icon} />
-              <SidebarLabel>{label}</SidebarLabel>
             </SidebarTarget>
           ))}
         </LayerStack>
@@ -63,8 +86,3 @@ const App = () => {
 };
 
 render(<App />, document.getElementsByTagName("body")[0]);
-/* hydrate(<App />);
- *
- * export async function prerender(data: any) {
- *   return await ssr(<App {...data} />);
- * } */

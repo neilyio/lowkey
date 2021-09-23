@@ -10,6 +10,7 @@
 		"extends": "preact"
 	},
 	"dependencies": {
+		"@types/lodash": "^4.14.173",
 		"@types/react": "^17.0.21",
 		"@types/react-dom": "^17.0.9",
 		"esbuild": "^0.9.7",

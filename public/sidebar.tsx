@@ -8,27 +8,40 @@ import {
   OnMouseEnter,
   OnMouseLeave,
   Selected,
+  ChildArray,
 } from "./types";
 
-export const SidebarCursor = ({ height, index = 0 }: Height & Index) => {
-  const spring = useSpring({ y: height * index });
+export const SidebarCursor = ({ height, index = 0, children }: Height & Index & ChildArray) => {
+  const { pxy } = useSpring({ pxy: height * index });
+
   return (
     <animated.div
-      className="w-full rounded-[12px]"
+      className="w-full rounded-[12px] overflow-hidden"
       style={{
         height,
         background:
           "linear-gradient(225deg, #EF9383 0%, #FF4785 48.96%, #8C40D9 100%)",
-        ...spring,
+       transform: pxy.to(n => `translate3d(0px, ${n}px, 0px)`),
       }}
-    ></animated.div>
+    >
+          <animated.div style={{
+              transform: pxy.to(n => `translate3d(0px, ${n * -1}px, 0px)`),
+          }}>{children}
+          </animated.div>
+    </animated.div>
   );
 };
+
+export const SidebarChildContainer = ({ height, children}: Height & ChildArray) => (
+    <div
+        className={"w-full flex p-[20px] items-center focus:outline-none space-x-6"}
+        style={{ height }}
+    >{children}</div>
+)
 
 export const SidebarTarget = ({
   height,
   onClick,
-  children,
   onMouseEnter,
   onMouseLeave,
 }: Height & OnClick & Child & OnMouseEnter & OnMouseLeave) => (
@@ -39,7 +52,6 @@ export const SidebarTarget = ({
     className={"w-full flex p-[20px] items-center focus:outline-none space-x-6"}
     style={{ height }}
   >
-    {children}
   </button>
 );
 
@@ -55,7 +67,7 @@ export const SidebarFill = ({ height, selected }: Height & Selected) => (
   />
 );
 
-export const SidebarContainer = ({ children }: any) => (
+export const SidebarContainer = ({ children }: ChildArray) => (
   <div
     className="w-[350px] h-full p-[20px] box-border flex justify-center"
     style={{ boxShadow: "inset -1px 0px 0px rgba(228, 228, 228, 0.2)" }}
@@ -64,7 +76,7 @@ export const SidebarContainer = ({ children }: any) => (
   </div>
 );
 
-export const SidebarLabel = ({ children }) => (
+export const SidebarLabel = ({ children }: ChildArray) => (
   <p
     className="text-white whitespace-nowrap"
     style={{ fontStyle: "normal", fontWeight: 600, fontSize: 16 }}

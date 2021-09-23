@@ -1,20 +1,27 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useTransition, animated } from "react-spring";
 import { clamp } from "lodash";
+import { ChildArray, Selected, TransitionConfig } from "./types";
 
-export const LayerStack = ({ children }: any) =>
-  children.map((child, index) => (
-    <div
-      key={index}
-      className="w-full h-full absolute"
-      style={{ zIndex: index }}
-    >
-      {child}
-    </div>
-  ));
+export const LayerStack = ({ children }: ChildArray) => (
+  <Fragment>
+    {children.map((child, index) => (
+      <div
+        key={index}
+        className="w-full h-full absolute"
+        style={{ zIndex: index }}
+      >
+        {child}
+      </div>
+    ))}
+  </Fragment>
+);
 
-
-export const FadeBetween = ({ children, selected, config = {} }) => {
+export const FadeBetween = ({
+  children,
+  selected,
+  config = {},
+}: ChildArray & Selected & TransitionConfig) => {
   const transitions = useTransition(
     children[clamp(selected, 0, children.length - 1)],
     {
