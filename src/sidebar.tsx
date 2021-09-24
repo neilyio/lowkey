@@ -11,8 +11,14 @@ import {
   ChildArray,
 } from "./types";
 
-export const SidebarCursor = ({ height, index = 0, children }: Height & Index & ChildArray) => {
-  const { pxy } = useSpring({ pxy: height * index });
+export const SidebarCursor = ({
+  height,
+  index = 0,
+  children,
+}: Height & Index & ChildArray) => {
+  const { pxy } = useSpring({
+    pxy: height * index,
+  });
 
   return (
     <animated.div
@@ -21,23 +27,31 @@ export const SidebarCursor = ({ height, index = 0, children }: Height & Index & 
         height,
         background:
           "linear-gradient(225deg, #EF9383 0%, #FF4785 48.96%, #8C40D9 100%)",
-       transform: pxy.to(n => `translate3d(0px, ${n}px, 0px)`),
+        transform: pxy.to((n) => `translate3d(0px, ${n}px, 0px)`),
       }}
     >
-          <animated.div style={{
-              transform: pxy.to(n => `translate3d(0px, ${n * -1}px, 0px)`),
-          }}>{children}
-          </animated.div>
+      <animated.div
+        style={{
+          transform: pxy.to((n) => `translate3d(0px, ${n * -1}px, 0px)`),
+        }}
+      >
+        {children}
+      </animated.div>
     </animated.div>
   );
 };
 
-export const SidebarChildContainer = ({ height, children}: Height & ChildArray) => (
-    <div
-        className={"w-full flex p-[20px] items-center focus:outline-none space-x-6"}
-        style={{ height }}
-    >{children}</div>
-)
+export const SidebarChildContainer = ({
+  height,
+  children,
+}: Height & ChildArray) => (
+  <div
+    className={"w-full flex p-[20px] items-center focus:outline-none space-x-6"}
+    style={{ height }}
+  >
+    {children}
+  </div>
+);
 
 export const SidebarTarget = ({
   height,
@@ -51,8 +65,7 @@ export const SidebarTarget = ({
     onMouseLeave={onMouseLeave}
     className={"w-full flex p-[20px] items-center focus:outline-none space-x-6"}
     style={{ height }}
-  >
-  </button>
+  ></button>
 );
 
 export const SidebarIcon = ({ src }) => <img className="h-8" src={src}></img>;
@@ -63,7 +76,10 @@ export const SidebarFill = ({ height, isSelected }: Height & IsSelected) => (
       "w-full rounded-md transition-colors duration-100" +
       (isSelected ? " bg-gray-900" : "")
     }
-    style={{ height, backgroundColor: isSelected && "rgba(228, 228, 228, 0.1)" }}
+    style={{
+      height,
+      backgroundColor: isSelected && "rgba(228, 228, 228, 0.1)",
+    }}
   />
 );
 
