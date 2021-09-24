@@ -7,7 +7,7 @@ yarn run esbuild \
     --loader:.png=file \
     --loader:.woff2=file \
     --loader:.svg=file \
-    --public-path=http://localhost:8000/dist \
+    --public-path=https://neilyio-lowkey-take-home.netlify.app/dist \
     --format=iife \
     --define:process.env.NODE_ENV="\"production\"" \
     src/index.tsx
