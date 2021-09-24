@@ -8,13 +8,13 @@
 // arguments to properly type-safe components.
 import React from "react";
 import { render } from "react-dom";
-import "../dist/css/global.css";
-import iconBoldDiscovery from "../dist/icons/bold/Discovery.svg";
-import iconBoldEditSquare from "../dist/icons/bold/Edit Square.svg";
-import iconBoldVideo from "../dist/icons/bold/Video.svg";
-import iconOutlineDiscovery from "../dist/icons/outline/Discovery.svg";
-import iconOutlineEditSquare from "../dist/icons/outline/Edit Square.svg";
-import iconOutlineVideo from "../dist/icons/outline/Video.svg";
+import "../public/css/global.css";
+import iconBoldDiscovery from "../public/icons/bold/Discovery.svg";
+import iconBoldEditSquare from "../public/icons/bold/Edit Square.svg";
+import iconBoldVideo from "../public/icons/bold/Video.svg";
+import iconOutlineDiscovery from "../public/icons/outline/Discovery.svg";
+import iconOutlineEditSquare from "../public/icons/outline/Edit Square.svg";
+import iconOutlineVideo from "../public/icons/outline/Video.svg";
 import { App } from "./app"
 
 
