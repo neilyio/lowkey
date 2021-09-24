@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"start": "bash start.sh",
-		"build": "bash build.sh",
+		"build": "bash build.sh"
 	},
 	"dependencies": {
 		"lodash": "^4.17.21",
@@ -13,6 +13,6 @@
 		"@types/lodash": "^4.14.173",
 		"@types/react": "^17.0.21",
 		"@types/react-dom": "^17.0.9",
-		"esbuild": "^0.9.7",
+		"esbuild": "^0.9.7"
 	}
 }
