@@ -11,5 +11,5 @@ yarn run esbuild \
     --loader:.svg=file \
     --public-path=http://localhost:8000/dist \
     --format=iife \
-    --define:process.env.NODE_ENV="\"production\"" \
+    --define:process.env.NODE_ENV="\"development\"" \
     src/index.tsx
