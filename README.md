@@ -1,4 +1,4 @@
-A simple menu demo using `react`, `react-spring`, and `lodash`. Buildled and built to use `esbuild`. The build is deployed to netlify at [this link](https://neilyio-lowkey-take-home.netlify.app).
+A simple menu demo using `react`, `react-spring`, and `lodash`. Buildled and built using `esbuild`. The build is deployed to Netlify at [this link](https://neilyio-lowkey-take-home.netlify.app).
 
 Much can be done with tiny, sharp tools. React, react-spring, and lodash are the only runtime dependencies of this project, and I believe that many projects can grow quite large using only these. Ask me to choose one to make it home from Mars, and I'll choose `lodash`. We can whittle our own DOM manipulation with a good knife.
 
@@ -11,7 +11,3 @@ Components are designed to be decoupled in functionality, but they share a commo
 There's room to promote optimization and reusability, as well flexibility in the type system. In particular, we could remove the redundant iteration inside of the `App` component, in which the data representing the sidebar buttons is looped multiple times. This would be a crucial optimization should the length of the sidebar grow. A second optimization might be a reduction in number of DOM elements used by combining state, styling, and logic into single components. As the application gets larger, we would trade off simplicity for performance as necessary.
 
 To achieve the "pass-over" effect of the outline/bold sidebar icons, this implementation duplicates all the label and icon elements in the sidebar. My decision here was that it's easier to model the sidebar as two nearly-identical "layers"... one with bolded icons, and one with outlined icons. Both layers are always mounted to the DOM, and the cursor "reveals" the bolded layer as it passes by. This is a accomplished with a trick of `overflow: hidden`, which avoids the deprecated CSS `clip`, the unadopted `clip-path`, and making too many calls to a DOM API like `getBoundingClientRect()`.
-
-
-
-
