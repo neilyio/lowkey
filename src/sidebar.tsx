@@ -11,6 +11,11 @@ import {
   ChildArray,
 } from "./types";
 
+// The colored area that represents the "selected" item. This component pulls
+// off a little trick with its children. When the colored area shifts
+// according to the "selected" index, it needs to "reverse-shift" its children,
+// so that the children appear to stay in the same space. This allows the
+// cursor to "reveal" its children through "overflow:hidden".
 export const SidebarCursor = ({
   height,
   index = 0,
@@ -41,6 +46,8 @@ export const SidebarCursor = ({
   );
 };
 
+// The area around the "content" of a sidebar item. Controls the border and
+// spacing around its children.
 export const SidebarChildContainer = ({
   height,
   children,
@@ -53,6 +60,7 @@ export const SidebarChildContainer = ({
   </div>
 );
 
+// A child-less div that acts as the click/hover target for the sidebar.
 export const SidebarTarget = ({
   height,
   onClick,
@@ -68,8 +76,11 @@ export const SidebarTarget = ({
   ></button>
 );
 
+// A simple fixed-height image component.
 export const SidebarIcon = ({ src }) => <img className="h-8" src={src}></img>;
 
+// An empty div component to indicate "soft" selection of a sidebar item.
+// Appropriate to be used as a "mouse-over" effect to indicate clickability.
 export const SidebarFill = ({ height, isSelected }: Height & IsSelected) => (
   <div
     className={
@@ -83,6 +94,8 @@ export const SidebarFill = ({ height, isSelected }: Height & IsSelected) => (
   />
 );
 
+// The container around the full-height sidebar area. Controls the border
+// and layout of sidebar menu items.
 export const SidebarContainer = ({ children }: ChildArray | Child) => (
   <div
     className="w-[350px] h-full p-[20px] box-border flex justify-center"
@@ -92,6 +105,7 @@ export const SidebarContainer = ({ children }: ChildArray | Child) => (
   </div>
 );
 
+// The text content inside of a sidebar item. Controls font and color.
 export const SidebarLabel = ({ children }: Child) => (
   <p
     className="text-white whitespace-nowrap"

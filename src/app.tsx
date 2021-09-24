@@ -12,10 +12,17 @@ import {
 } from "./sidebar";
 import { SidebarData } from "./types"
 
+// A full-screen container surrounding the entire application.
+// Controls layout and background color.
 const AppContainer = ({ children }) => (
   <div className="w-full h-full bg-black flex">{children}</div>
 );
 
+// The main application component, which holds high-level configuration
+// and selection state. This component itself has few "visual" considerations,
+// and is more concerned with composing child components and passing
+// well-formatted arguments. As the application grows, this component may grow
+// an "onSelect" argument that might pass selection events and data up to parents.
 export const App = ({ sidebar }: SidebarData) => {
   const height = 56;
   const [selected, setSelected] = useState(0);
